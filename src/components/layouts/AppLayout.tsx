@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import BottomNav from '@/components/navigation/BottomNav';
 import Seo from '@/components/Seo';
 
 interface ILayoutProps {
@@ -24,6 +25,7 @@ export default function AppLayout({
       />
       <main>
         <section>{children}</section>
+        <BottomNav />
       </main>
     </div>
   );
