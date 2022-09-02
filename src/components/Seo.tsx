@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
+import { APP_NAME } from '@/constants/app';
+
 // !STARTERCONF Change these default meta
 const defaultMeta = {
-  title: 'Ticket Pro',
-  siteName: 'Ticket Pro',
+  title: APP_NAME,
+  siteName: APP_NAME,
   description:
     'A starter for Next.js, Tailwind CSS, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */

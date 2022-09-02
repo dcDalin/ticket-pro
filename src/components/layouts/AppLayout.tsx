@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import BottomNav from '@/components/navigation/BottomNav';
+import TopNav from '@/components/navigation/TopNav';
 import Seo from '@/components/Seo';
 
 interface ILayoutProps {
@@ -24,6 +25,7 @@ export default function AppLayout({
         date={templateDate}
       />
       <main>
+        <TopNav />
         <section>{children}</section>
         <BottomNav />
       </main>

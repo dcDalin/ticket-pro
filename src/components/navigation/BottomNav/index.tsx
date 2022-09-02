@@ -4,7 +4,7 @@ import { FaRegUserCircle } from 'react-icons/fa';
 
 import BottomNavItem from '@/components/navigation/BottomNav/BottomNavItem';
 
-import { HOME } from '@/constant/routes';
+import { HOME } from '@/constants/routes';
 
 export default function BottomNav() {
   const router = useRouter();
