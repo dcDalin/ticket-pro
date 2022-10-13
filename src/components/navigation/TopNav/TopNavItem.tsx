@@ -14,6 +14,7 @@ export default function TopNavItem({ title, icon, path }: ITopNavItemProps) {
       className={`btn btn-ghost flex  h-full cursor-pointer items-center space-x-1 rounded-none border-b-2 px-4 ${
         router.pathname === path && 'border-0 border-b-2 border-primary'
       }`}
+      onClick={() => router.push(path)}
     >
       {icon}
       <div>{title}</div>
