@@ -9,7 +9,7 @@ export default function TopNav() {
   const navItems = useNavItems();
 
   return (
-    <div className='flex h-16 items-center justify-between border-b bg-base-100 p-0 px-4'>
+    <div className='flex h-12 items-center justify-between border-b bg-base-100 p-0 px-4 md:h-16'>
       <div>
         <h1 className='text-xl normal-case'>{APP_NAME}</h1>
       </div>
