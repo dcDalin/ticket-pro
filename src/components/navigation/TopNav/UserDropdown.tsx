@@ -1,15 +1,15 @@
-import Link from 'next/link';
 import { BiMenuAltRight } from 'react-icons/bi';
 
-import { SIGN_UP } from '@/constants/routes';
+import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
+
 export default function UserDropdown() {
   return (
     <div className='dropdown dropdown-end'>
-      <label tabIndex={0} className='bg- btn btn-outline rounded-full px-2'>
+      <label tabIndex={0} className='btn btn-outline rounded-full px-2'>
         <div className='flex items-center space-x-2'>
-          <BiMenuAltRight className='h-8 w-8' />
+          <BiMenuAltRight className='h-6 w-6' />
           <div className='avatar'>
-            <div className='h-8 rounded-full'>
+            <div className='h-8 w-8 rounded-full bg-gray-300'>
               {/* <img src='https://placeimg.com/192/192/people' /> */}
             </div>
           </div>
@@ -18,20 +18,12 @@ export default function UserDropdown() {
 
       <ul
         tabIndex={0}
-        className='dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow'
+        className='dropdown-content menu rounded-box mt-2 w-52 bg-base-100 p-2 shadow'
       >
-        <li>
-          <Link href={SIGN_UP} className='justify-between'>
-            Sign up
-          </Link>
-        </li>
-        <li>
-          <a>Log in</a>
-        </li>
-        <div className='divider'></div>
-        <li>
-          <a>Logout</a>
-        </li>
+        <DropDownLink />
+
+        <div className='divider m-0'></div>
+        <DropDownLink />
       </ul>
     </div>
   );

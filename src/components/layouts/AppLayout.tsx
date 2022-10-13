@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import Container from '@/components/layouts/Container';
 import BottomNav from '@/components/navigation/BottomNav';
 import TopNav from '@/components/navigation/TopNav';
 import Seo from '@/components/Seo';
@@ -26,7 +27,7 @@ export default function AppLayout({
       />
       <main>
         <TopNav />
-        <section>{children}</section>
+        <Container>{children}</Container>
         <BottomNav />
       </main>
     </div>

@@ -1,49 +1,15 @@
-import { useRouter } from 'next/router';
-import { BiHomeAlt } from 'react-icons/bi';
-import { FaRegUserCircle } from 'react-icons/fa';
+import useNavItems from '@/hooks/useNavItems';
 
 import BottomNavItem from '@/components/navigation/BottomNav/BottomNavItem';
 
-import { HOME } from '@/constants/routes';
-
 export default function BottomNav() {
-  const router = useRouter();
-
-  const handleRedirect = (path: string) => {
-    router.push(path);
-  };
-
-  const bottomNavItems = [
-    {
-      title: 'Home',
-      icon: <BiHomeAlt />,
-      handleClick: () => handleRedirect(HOME),
-      active: router.pathname === HOME,
-    },
-    {
-      title: 'Home',
-      icon: <BiHomeAlt />,
-      handleClick: () => handleRedirect(HOME),
-      active: router.pathname === HOME,
-    },
-    {
-      title: 'Sign in',
-      icon: <FaRegUserCircle />,
-      handleClick: () => handleRedirect(HOME),
-    },
-  ];
+  const navItems = useNavItems();
 
   return (
     <div className='btm-nav flex md:hidden'>
-      {bottomNavItems && bottomNavItems.length
-        ? bottomNavItems.map(({ title, icon, active, handleClick }) => (
-            <BottomNavItem
-              key={title}
-              icon={icon}
-              active={active}
-              title={title}
-              handleClick={handleClick}
-            />
+      {navItems && navItems.length
+        ? navItems.map(({ title, icon, path }) => (
+            <BottomNavItem key={title} icon={icon} title={title} path={path} />
           ))
         : null}
     </div>

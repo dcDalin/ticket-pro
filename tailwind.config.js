@@ -7,11 +7,11 @@ module.exports = {
     extend: {
       fontFamily: {
         primary: ['Montserrat', ...fontFamily.sans],
-      },  
+      },
     },
   },
   daisyui: {
-    themes: ["bumblebee"],
+    themes: ['winter'],
   },
-  plugins: [require("daisyui")],
+  plugins: [require('daisyui')],
 };
