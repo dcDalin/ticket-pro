@@ -1,8 +1,13 @@
+import { useRouter } from 'next/router';
 import { BiMenuAltRight } from 'react-icons/bi';
 
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
 
+import { LOG_IN } from '@/constants/routes';
+
 export default function UserDropdown() {
+  const router = useRouter();
+
   return (
     <div className='dropdown dropdown-end'>
       <label
@@ -23,10 +28,10 @@ export default function UserDropdown() {
         tabIndex={0}
         className='dropdown-content menu rounded-box mt-2 w-52 bg-base-100 p-2 shadow'
       >
-        <DropDownLink />
+        <DropDownLink handleClick={() => router.push(LOG_IN)} title='Log in' />
 
-        <div className='divider m-0'></div>
-        <DropDownLink />
+        {/* <div className='divider m-0'></div>
+        <DropDownLink  /> */}
       </ul>
     </div>
   );

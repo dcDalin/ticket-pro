@@ -1,7 +1,15 @@
-export default function DropDownLink() {
+interface IDropDownLinkProps {
+  handleClick: () => void;
+  title: string;
+}
+
+export default function DropDownLink({
+  handleClick,
+  title,
+}: IDropDownLinkProps) {
   return (
-    <li className='w-full'>
-      <a className='w-full '>Sign up</a>
+    <li className='w-full' onClick={handleClick}>
+      <a className='w-full '>{title}</a>
     </li>
   );
 }

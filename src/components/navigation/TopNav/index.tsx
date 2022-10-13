@@ -1,9 +1,8 @@
 import useNavItems from '@/hooks/useNavItems';
 
+import AppTitle from '@/components/navigation/AppTitle';
 import TopNavItem from '@/components/navigation/TopNav/TopNavItem';
 import UserDropdown from '@/components/navigation/TopNav/UserDropdown';
-
-import { APP_NAME } from '@/constants/app';
 
 export default function TopNav() {
   const navItems = useNavItems();
@@ -11,7 +10,7 @@ export default function TopNav() {
   return (
     <div className='flex h-12 items-center justify-between border-b bg-base-100 p-0 px-4 md:h-16'>
       <div>
-        <h1 className='text-xl normal-case'>{APP_NAME}</h1>
+        <AppTitle />
       </div>
 
       <div className='hidden h-full items-center md:flex'>
