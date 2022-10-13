@@ -1,3 +1,4 @@
+import { ApolloProvider } from '@apollo/client';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -5,6 +6,8 @@ import { useEffect } from 'react';
 
 import 'nprogress/nprogress.css';
 import '@/styles/globals.css';
+
+import apolloClient from '@/lib/apollo';
 
 import ModalWrapper from '@/components/modals/ModalWrapper';
 
@@ -18,10 +21,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
+    <ApolloProvider client={apolloClient}>
       <Component {...pageProps} />
       <ModalWrapper />
-    </>
+    </ApolloProvider>
   );
 }
 
