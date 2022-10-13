@@ -16,8 +16,8 @@ export default function AuthFormLayout({
   const router = useRouter();
 
   return (
-    <div className='mx-auto my-0 w-full max-w-2xl bg-base-100 px-4 pb-10 shadow-xl md:my-5'>
-      <div className='border-b-1 flex h-16 flex-nowrap items-center md:border-b-0'>
+    <div className='mx-auto my-0 w-full max-w-2xl bg-base-100 px-4 pb-10 shadow-none md:my-5 md:shadow-xl'>
+      <div className='flex h-16 flex-nowrap items-center'>
         <MdArrowBack
           className='h-6 w-6 cursor-pointer md:h-8 md:w-8'
           onClick={() => router.back()}
