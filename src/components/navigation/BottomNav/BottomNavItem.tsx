@@ -16,9 +16,9 @@ export default function BottomNavItem({
 
   return (
     <button
-      className={`${
-        router.pathname === path && 'border-t-2 border-primary'
-      } cursor-pointer`}
+      className={`cursor-pointer border-t-2 ${
+        router.pathname === path ? 'border-primary' : 'border-transparent'
+      }`}
       onClick={() => router.push(path)}
     >
       {icon}
