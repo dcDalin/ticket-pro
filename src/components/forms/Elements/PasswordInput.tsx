@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 import { RegisterOptions, useFormContext } from 'react-hook-form';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { ImSpinner2 } from 'react-icons/im';
 
 export type PasswordInputProps = {
   /** Input label */
@@ -26,6 +27,7 @@ export type PasswordInputProps = {
   hideError?: boolean;
   /** Manual validation using RHF, it is encouraged to use yup resolver instead */
   validation?: RegisterOptions;
+  loading?: boolean;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function PasswordInput({
@@ -35,6 +37,7 @@ export default function PasswordInput({
   id,
   readOnly = false,
   validation,
+  loading,
   ...rest
 }: PasswordInputProps) {
   const {
@@ -46,9 +49,14 @@ export default function PasswordInput({
   const togglePassword = () => setShowPassword((prev) => !prev);
 
   return (
-    <div>
-      <label htmlFor={id} className='block text-sm font-normal text-gray-700'>
+    <div className='form-control w-full pb-4'>
+      <label className='label' htmlFor={id}>
         {label}
+        {loading && (
+          <span className='label-text-alt'>
+            <ImSpinner2 className='animate-spin' />
+          </span>
+        )}
       </label>
       <div className='relative mt-1'>
         <input
@@ -59,12 +67,8 @@ export default function PasswordInput({
           id={id}
           readOnly={readOnly}
           className={clsx(
-            readOnly
-              ? 'cursor-not-allowed border-gray-300 bg-gray-100 focus:border-gray-300 focus:ring-0'
-              : errors[id]
-              ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
-              : 'focus:border-primary-500 focus:ring-primary-500 border-gray-300',
-            'block w-full rounded-md shadow-sm'
+            'input w-full',
+            errors[id] ? 'input-error' : 'input-bordered'
           )}
           placeholder={placeholder}
           aria-describedby={id}
@@ -73,7 +77,7 @@ export default function PasswordInput({
         <button
           onClick={togglePassword}
           type='button'
-          className='focus:ring-primary-500 absolute inset-y-0 right-0 mr-3 flex items-center rounded-lg p-1 focus:outline-none focus:ring'
+          className='absolute inset-y-0 right-0 mr-3 flex items-center rounded-lg p-0'
         >
           {showPassword ? (
             <HiEyeOff className='cursor-pointer text-xl text-gray-500 hover:text-gray-600' />

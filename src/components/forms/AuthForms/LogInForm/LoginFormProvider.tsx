@@ -1,6 +1,7 @@
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 
 import Input from '@/components/forms/Elements/Input';
+import PasswordInput from '@/components/forms/Elements/PasswordInput';
 
 type FormValues = {
   email: string;
@@ -36,7 +37,7 @@ export default function LoginFormProvider() {
             },
           }}
         />
-        <Input
+        <PasswordInput
           id='password'
           label='Password'
           type='password'
