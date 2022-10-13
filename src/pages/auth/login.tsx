@@ -1,4 +1,4 @@
-import LoginForm from '@/components/forms/LogInForm';
+import LoginForm from '@/components/forms/AuthForms/LogInForm';
 import NoHeaderLayout from '@/components/layouts/NoHeaderLayout';
 
 export default function LogInpage() {
