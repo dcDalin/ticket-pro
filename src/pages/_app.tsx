@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import 'nprogress/nprogress.css';
 import '@/styles/globals.css';
 
-import apolloClient from '@/lib/apollo';
+import client from '@/lib/apollo';
 
 import ModalWrapper from '@/components/modals/ModalWrapper';
 
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={client}>
       <Component {...pageProps} />
       <ModalWrapper />
     </ApolloProvider>

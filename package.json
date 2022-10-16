@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
+    "@clerk/nextjs": "^4.5.4",
     "@headlessui/react": "^1.6.6",
     "@reduxjs/toolkit": "^1.8.6",
     "clsx": "^1.2.1",
