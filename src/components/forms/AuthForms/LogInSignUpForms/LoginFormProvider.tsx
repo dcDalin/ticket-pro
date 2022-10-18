@@ -19,7 +19,14 @@ export default function LoginFormProvider() {
   const onSubmit: SubmitHandler<FormValues> = async () => {
     // try {
     //   const { email, password } = data;
-    // } catch (error) {}
+    //   const { session, error } = await nhost.auth.signIn({
+    //     email,
+    //     password,
+    //   });
+    //   console.log('--------> res is: ', res);
+    // } catch (error) {
+    //   console.log('Erro is: ', error);
+    // }
   };
 
   return (
