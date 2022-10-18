@@ -1,10 +1,14 @@
-import { AppProps } from 'next/app';
+import { NhostNextProvider } from '@nhost/nextjs';
+import { NhostApolloProvider } from '@nhost/react-apollo';
+import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
 
 import 'nprogress/nprogress.css';
 import '@/styles/globals.css';
+
+import nhost from '@/lib/nhost';
 
 import ModalWrapper from '@/components/modals/ModalWrapper';
 
@@ -18,11 +22,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <>
-      <Component {...pageProps} />
+    <NhostNextProvider nhost={nhost} initial={pageProps.nhostSession}>
+      <NhostApolloProvider nhost={nhost}>
+        <Component {...pageProps} />
 
-      <ModalWrapper />
-    </>
+        <ModalWrapper />
+      </NhostApolloProvider>
+    </NhostNextProvider>
   );
 }
 
