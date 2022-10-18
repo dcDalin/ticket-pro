@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <NhostNextProvider nhost={nhost} initial={pageProps.nhostSession}>
+    <NhostNextProvider nhost={nhost}>
       <NhostApolloProvider nhost={nhost}>
         <Component {...pageProps} />
 
