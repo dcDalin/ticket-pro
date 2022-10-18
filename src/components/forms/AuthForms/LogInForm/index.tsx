@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { BsGoogle } from 'react-icons/bs';
 import { GrFacebook } from 'react-icons/gr';
 
@@ -22,6 +23,21 @@ export default function LoginForm() {
           <h3>Use your email and password</h3>
 
           <LoginFormProvider />
+
+          <div className='flex flex-col items-center space-y-2'>
+            <Link href=''>
+              <span className='link link-primary mt-4'>
+                Forgot your password?
+              </span>
+            </Link>
+
+            <div className='flex items-center space-x-1'>
+              <p>Don&apos;t have an account?</p>
+              <Link href=''>
+                <span className='link link-primary'>Create one today.</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </AuthFormLayout>
