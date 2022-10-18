@@ -17,9 +17,9 @@ export default function AuthFormLayout({
 
   return (
     <div className='mx-auto my-0 w-full max-w-4xl border-0 bg-base-100 pb-10 shadow-none md:my-5 md:border md:shadow-xl'>
-      <div className='flex h-16 flex-nowrap items-center'>
+      <div className='flex h-16 flex-nowrap items-center px-4'>
         <MdArrowBack
-          className='h-6 w-6 cursor-pointer md:h-8 md:w-8'
+          className='h-full w-6 cursor-pointer md:h-full md:w-8'
           onClick={() => router.back()}
         />
         <div className='grow text-center'>
