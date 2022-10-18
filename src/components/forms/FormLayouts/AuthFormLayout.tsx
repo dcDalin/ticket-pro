@@ -4,6 +4,8 @@ import { MdArrowBack } from 'react-icons/md';
 
 import AppTitle from '@/components/navigation/AppTitle';
 
+import { HOME } from '@/constants/routes';
+
 interface IAuthFormLayoutProps {
   children: ReactNode;
   title: string;
@@ -20,7 +22,7 @@ export default function AuthFormLayout({
       <div className='flex h-16 flex-nowrap items-center px-4'>
         <MdArrowBack
           className='h-full w-6 cursor-pointer md:h-full md:w-8'
-          onClick={() => router.back()}
+          onClick={() => router.push(HOME)}
         />
         <div className='grow text-center'>
           <AppTitle />

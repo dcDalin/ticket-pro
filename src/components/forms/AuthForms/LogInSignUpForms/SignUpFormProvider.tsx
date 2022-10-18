@@ -1,9 +1,18 @@
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+
+import nhost from '@/lib/nhost';
 
 import Input from '@/components/forms/Elements/Input';
 import PasswordInput from '@/components/forms/Elements/PasswordInput';
+
+import {
+  signUpFormLoading,
+  stopAuthFormLoading,
+} from '@/redux/authForms/authFormsSlice';
+import { RootState } from '@/redux/store';
 
 type FormValues = {
   username: string;
@@ -12,6 +21,12 @@ type FormValues = {
 };
 
 export default function SignUpFormProvider() {
+  const dispatch = useDispatch();
+
+  const { isSignUpFormLoading } = useSelector(
+    (state: RootState) => state.authForms
+  );
+
   const [usernameSearchLoading, setUserNameSearchLoading] = useState(false);
 
   const methods = useForm<FormValues>({
@@ -21,20 +36,28 @@ export default function SignUpFormProvider() {
 
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<FormValues> = async () => {
-    // try {
-    //   const { username, email, password } = data;
-    //   const res = await nhost.auth.signUp({
-    //     email,
-    //     password,
-    //     options: {
-    //       displayName: username,
-    //     },
-    //   });
-    //   console.log('--------> res is: ', res);
-    // } catch (error) {
-    //   console.log('Erro is: ', error);
-    // }
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      dispatch(signUpFormLoading());
+      const { username, email, password } = data;
+
+      const { error } = await nhost.auth.signUp({
+        email,
+        password,
+        options: {
+          displayName: username,
+        },
+      });
+
+      if (error) {
+        dispatch(stopAuthFormLoading());
+      } else {
+        // TODO: Redirect to home page or back
+        dispatch(stopAuthFormLoading());
+      }
+    } catch (error) {
+      dispatch(stopAuthFormLoading());
+    }
   };
 
   return (
@@ -56,7 +79,7 @@ export default function SignUpFormProvider() {
               message: 'Username is too long',
             },
             pattern: {
-              value: /^[a-zA-Z0-9]+$/,
+              value: /^[a-zA-Z0-9_]+$/,
               message: 'Invalid Username',
             },
             validate: AwesomeDebouncePromise(async (value: string) => {
@@ -117,8 +140,14 @@ export default function SignUpFormProvider() {
           }}
         />
 
-        <button className={`btn btn-primary btn-block my-6 `} type='submit'>
-          Log in
+        <button
+          disabled={isSignUpFormLoading || usernameSearchLoading}
+          className={`btn btn-primary btn-block my-6 ${
+            isSignUpFormLoading ? 'loading' : null
+          }`}
+          type='submit'
+        >
+          sign up
         </button>
       </form>
     </FormProvider>

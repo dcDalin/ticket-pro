@@ -48,12 +48,20 @@ export default function LoginSignUpForms({ form }: ILoginSignUpFormsProps) {
                 </div>
               </>
             ) : (
-              <div className='mt-4 flex items-center space-x-1'>
-                <p>Already have an account?</p>
-                <Link href={LOG_IN}>
-                  <span className='link link-primary'>Log in instead.</span>
-                </Link>
-              </div>
+              <>
+                <div className='mt-4 flex items-center space-x-1'>
+                  <p>By signing up you agree to our</p>
+                  <Link href=''>
+                    <span className='link link-primary'>terms of use.</span>
+                  </Link>
+                </div>
+                <div className='mt-4 flex items-center space-x-1'>
+                  <p>Already have an account?</p>
+                  <Link href={LOG_IN}>
+                    <span className='link link-primary'>Log in instead.</span>
+                  </Link>
+                </div>
+              </>
             )}
           </div>
         </div>
