@@ -18,7 +18,11 @@ export default function AuthFormLayout({
 }: IAuthFormLayoutProps) {
   const router = useRouter();
 
-  const redirectTo = localStorage.getItem(REDIRECT_TO) || HOME;
+  let redirectTo = HOME;
+
+  if (typeof window !== 'undefined') {
+    redirectTo = localStorage.getItem(REDIRECT_TO) || HOME;
+  }
 
   return (
     <div className='mx-auto my-0 w-full max-w-4xl border-0 bg-base-100 pb-10 shadow-none md:my-5 md:border md:shadow-xl'>
