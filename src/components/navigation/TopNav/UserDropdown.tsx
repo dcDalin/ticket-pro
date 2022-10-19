@@ -3,10 +3,18 @@ import { BiMenuAltRight } from 'react-icons/bi';
 
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
 
+import { REDIRECT_TO } from '@/constants/localStorage';
 import { LOG_IN } from '@/constants/routes';
 
 export default function UserDropdown() {
   const router = useRouter();
+
+  const navigateToAuthPage = () => {
+    // set path user was on before navigating to auth pages
+    // update local storage
+    localStorage.setItem(REDIRECT_TO, router.pathname);
+    router.push(LOG_IN);
+  };
 
   return (
     <div className='dropdown dropdown-end'>
@@ -28,7 +36,7 @@ export default function UserDropdown() {
         tabIndex={0}
         className='dropdown-content menu rounded-box mt-2 w-52 bg-base-100 p-2 shadow'
       >
-        <DropDownLink handleClick={() => router.push(LOG_IN)} title='Log in' />
+        <DropDownLink handleClick={navigateToAuthPage} title='My Account' />
 
         {/* <div className='divider m-0'></div>
         <DropDownLink  /> */}

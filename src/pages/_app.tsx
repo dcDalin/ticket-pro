@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import 'nprogress/nprogress.css';
 import '@/styles/globals.css';
@@ -25,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <NhostNextProvider nhost={nhost}>
       <NhostApolloProvider nhost={nhost}>
         <Component {...pageProps} />
-
+        <Toaster />
         <ModalWrapper />
       </NhostApolloProvider>
     </NhostNextProvider>

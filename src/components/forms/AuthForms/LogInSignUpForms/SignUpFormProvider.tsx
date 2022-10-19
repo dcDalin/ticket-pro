@@ -1,6 +1,5 @@
-import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 
 import nhost from '@/lib/nhost';
@@ -15,7 +14,7 @@ import {
 import { RootState } from '@/redux/store';
 
 type FormValues = {
-  username: string;
+  name: string;
   email: string;
   password: string;
 };
@@ -27,8 +26,6 @@ export default function SignUpFormProvider() {
     (state: RootState) => state.authForms
   );
 
-  const [usernameSearchLoading, setUserNameSearchLoading] = useState(false);
-
   const methods = useForm<FormValues>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
@@ -39,18 +36,19 @@ export default function SignUpFormProvider() {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       dispatch(signUpFormLoading());
-      const { username, email, password } = data;
+      const { name, email, password } = data;
 
       const { error } = await nhost.auth.signUp({
         email,
         password,
         options: {
-          displayName: username,
+          displayName: name,
         },
       });
 
       if (error) {
         dispatch(stopAuthFormLoading());
+        toast.error(error.message);
       } else {
         // TODO: Redirect to home page or back
         dispatch(stopAuthFormLoading());
@@ -64,59 +62,30 @@ export default function SignUpFormProvider() {
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-0'>
         <Input
-          id='username'
-          label='Username'
+          id='name'
+          label='Name'
+          type='text'
           placeholder=''
-          loading={usernameSearchLoading}
           validation={{
-            required: 'Username name is required',
+            required: 'Name is required',
             minLength: {
               value: 3,
-              message: 'Username is too short',
+              message: 'Name is too short',
             },
             maxLength: {
-              value: 25,
-              message: 'Username is too long',
+              value: 35,
+              message: 'Name is too long',
             },
             pattern: {
-              value: /^[a-zA-Z0-9_]+$/,
-              message: 'Invalid Username',
+              value: /^[a-zA-Z0-9_ ]+$/,
+              message: 'Invalid name',
             },
-            validate: AwesomeDebouncePromise(async (value: string) => {
-              try {
-                setUserNameSearchLoading(true);
-                // TODO: Crate a function for this
-                const checkUserNameExists = await fetch(
-                  `https://${process.env.NEXT_PUBLIC_NHOST_SUBDOMAIN}.nhost.run/api/rest/check-username-exists/${value}`,
-                  {
-                    method: 'GET',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                  }
-                );
-
-                const data = await checkUserNameExists.json();
-
-                if (
-                  (data && data.users && data.users === undefined) ||
-                  data.users.length === 0
-                ) {
-                  setUserNameSearchLoading(false);
-                  return true;
-                }
-                setUserNameSearchLoading(false);
-                return 'Username already exists. Try another one';
-              } catch (err) {
-                setUserNameSearchLoading(false);
-                return 'Something went wrong. Please try again';
-              }
-            }, 700),
           }}
         />
         <Input
           id='email'
           label='Email'
+          type='text'
           placeholder='email@address.com'
           validation={{
             required: 'Email is required',
@@ -141,7 +110,7 @@ export default function SignUpFormProvider() {
         />
 
         <button
-          disabled={isSignUpFormLoading || usernameSearchLoading}
+          disabled={isSignUpFormLoading}
           className={`btn btn-primary btn-block my-6 ${
             isSignUpFormLoading ? 'loading' : null
           }`}
