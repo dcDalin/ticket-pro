@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ import {
   stopAuthFormLoading,
 } from '@/redux/authForms/authFormsSlice';
 import { RootState } from '@/redux/store';
+import redirectTo from '@/utils/redirectTo';
 
 type FormValues = {
   name: string;
@@ -21,6 +23,7 @@ type FormValues = {
 
 export default function SignUpFormProvider() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { isSignUpFormLoading } = useSelector(
     (state: RootState) => state.authForms
@@ -52,6 +55,7 @@ export default function SignUpFormProvider() {
       } else {
         // TODO: Redirect to home page or back
         dispatch(stopAuthFormLoading());
+        router.push(redirectTo);
       }
     } catch (error) {
       dispatch(stopAuthFormLoading());

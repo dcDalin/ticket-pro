@@ -4,8 +4,7 @@ import { MdArrowBack } from 'react-icons/md';
 
 import AppTitle from '@/components/navigation/AppTitle';
 
-import { REDIRECT_TO } from '@/constants/localStorage';
-import { HOME } from '@/constants/routes';
+import redirectTo from '@/utils/redirectTo';
 
 interface IAuthFormLayoutProps {
   children: ReactNode;
@@ -17,12 +16,6 @@ export default function AuthFormLayout({
   title,
 }: IAuthFormLayoutProps) {
   const router = useRouter();
-
-  let redirectTo = HOME;
-
-  if (typeof window !== 'undefined') {
-    redirectTo = localStorage.getItem(REDIRECT_TO) || HOME;
-  }
 
   return (
     <div className='mx-auto my-0 w-full max-w-4xl border-0 bg-base-100 pb-10 shadow-none md:my-5 md:border md:shadow-xl'>
