@@ -1,12 +1,9 @@
 import { gql } from '@apollo/client';
 
-export const GET_TEST = gql`
-  query GetTest {
-    test {
+export const CHECK_USER_PROFILE_EXISTS = gql`
+  query CheckUserProfileExists($id: uuid = "") {
+    profile_by_pk(id: $id) {
       id
-      name
-      updated_at
-      created_at
     }
   }
 `;

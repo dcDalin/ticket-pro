@@ -6,13 +6,14 @@ import {
 } from '@nhost/nextjs';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { AiOutlineLogin, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { BiMenuAltRight } from 'react-icons/bi';
+import { MdManageAccounts } from 'react-icons/md';
 
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
 
 import { REDIRECT_TO } from '@/constants/localStorage';
-import { LOG_IN } from '@/constants/routes';
+import { ACCOUNT, LOG_IN } from '@/constants/routes';
 
 export default function UserDropdown() {
   const router = useRouter();
@@ -64,9 +65,9 @@ export default function UserDropdown() {
         {isAuthenticated ? (
           <>
             <DropDownLink
-              handleClick={navigateToAuthPage}
-              title='Profile'
-              icon={<AiOutlineUser />}
+              handleClick={() => router.push(ACCOUNT)}
+              title='My Account'
+              icon={<MdManageAccounts />}
             />
             <div className='divider m-0'></div>
             <DropDownLink

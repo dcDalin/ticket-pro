@@ -4,27 +4,28 @@ import { FC } from 'react';
 
 import useCheckUserProfileExists from '@/hooks/useCheckUserProfileExists';
 
-import { COMPLETE_PROFILE, LOG_IN } from '@/constants/routes';
+import { COMPLETE_PROFILE } from '@/constants/routes';
 
-type withAuthenticationFn = (Component: FC) => FC;
+type withPageFn = (Component: FC) => FC;
 
-const withAuthentication: withAuthenticationFn = (Component) => {
+const withPage: withPageFn = (Component) => {
   const Authenticated: FC = (props): JSX.Element | null => {
     const { isLoading, isAuthenticated } = useAuthenticationStatus();
-    const { data, loading } = useCheckUserProfileExists();
-
     const router = useRouter();
+
+    const { data, loading } = useCheckUserProfileExists();
 
     if (isLoading || loading) {
       return <h1>Loading...</h1>;
     }
 
-    if (!isAuthenticated) {
-      router.push(LOG_IN);
-      return null;
-    } else if (!data || !data.profile_by_pk) {
-      router.push(COMPLETE_PROFILE);
-      return null;
+    if (isAuthenticated) {
+      if (data && data.profile_by_pk) {
+        return <Component {...props} />;
+      } else {
+        router.push(COMPLETE_PROFILE);
+        return null;
+      }
     }
 
     return <Component {...props} />;
@@ -33,4 +34,4 @@ const withAuthentication: withAuthenticationFn = (Component) => {
   return Authenticated;
 };
 
-export default withAuthentication;
+export default withPage;

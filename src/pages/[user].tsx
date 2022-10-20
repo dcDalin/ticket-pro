@@ -1,6 +1,8 @@
 import AppLayout from '@/components/layouts/AppLayout';
 
-export default function UserProfilePage() {
+import withPage from '@/HOC/withPage';
+
+function UserProfilePage() {
   // const router = useRouter();
   // const userId = useUserId();
   // const accessToken = useAccessToken();
@@ -13,3 +15,5 @@ export default function UserProfilePage() {
     </AppLayout>
   );
 }
+
+export default withPage(UserProfilePage);
