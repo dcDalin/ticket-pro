@@ -1,4 +1,7 @@
+import CompleteProfileForm from '@/components/forms/CompleteProfileForm';
 import NoHeaderLayout from '@/components/layouts/NoHeaderLayout';
+
+import withCompleteProfile from '@/HOC/withCompleteProfile';
 
 const CompleteProfilePage = () => {
   return (
@@ -6,9 +9,9 @@ const CompleteProfilePage = () => {
       templateTitle='Complete Profile'
       templateDescription='Complete Profile'
     >
-      Complete your profile
+      <CompleteProfileForm />
     </NoHeaderLayout>
   );
 };
 
-export default CompleteProfilePage;
+export default withCompleteProfile(CompleteProfilePage);
