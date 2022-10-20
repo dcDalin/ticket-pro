@@ -1,4 +1,12 @@
+import {
+  useAuthenticationStatus,
+  useSignOut,
+  useUserAvatarUrl,
+  useUserDisplayName,
+} from '@nhost/nextjs';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { AiOutlineLogin, AiOutlineLogout, AiOutlineUser } from 'react-icons/ai';
 import { BiMenuAltRight } from 'react-icons/bi';
 
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
@@ -8,6 +16,10 @@ import { LOG_IN } from '@/constants/routes';
 
 export default function UserDropdown() {
   const router = useRouter();
+  const { isLoading, isAuthenticated } = useAuthenticationStatus();
+  const avatar = useUserAvatarUrl();
+  const displayName = useUserDisplayName();
+  const { signOut } = useSignOut();
 
   const navigateToAuthPage = () => {
     // set path user was on before navigating to auth pages
@@ -24,11 +36,24 @@ export default function UserDropdown() {
       >
         <div className='flex items-center space-x-2'>
           <BiMenuAltRight className='h-6 w-6' />
-          <div className='avatar'>
-            <div className='h-6 w-6 rounded-full bg-gray-300 md:h-8 md:w-8'>
-              {/* <img src='https://placeimg.com/192/192/people' /> */}
+          {isAuthenticated ? (
+            <div className='avatar flex items-center justify-center'>
+              {displayName ? (
+                <span className='flex items-center justify-center pr-2'>
+                  {displayName.split(' ')[0]}
+                </span>
+              ) : null}
+              <div
+                className={`h-6 w-6 rounded-full bg-gray-300 md:h-8 md:w-8 ${
+                  isLoading && 'animate-pulse cursor-wait'
+                }`}
+              >
+                {avatar ? (
+                  <Image src={avatar} alt='Avatar' width={100} height={100} />
+                ) : null}
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </label>
 
@@ -36,10 +61,27 @@ export default function UserDropdown() {
         tabIndex={0}
         className='dropdown-content menu rounded-box mt-2 w-52 bg-base-100 p-2 shadow'
       >
-        <DropDownLink handleClick={navigateToAuthPage} title='My Account' />
-
-        {/* <div className='divider m-0'></div>
-        <DropDownLink  /> */}
+        {isAuthenticated ? (
+          <>
+            <DropDownLink
+              handleClick={navigateToAuthPage}
+              title='Profile'
+              icon={<AiOutlineUser />}
+            />
+            <div className='divider m-0'></div>
+            <DropDownLink
+              handleClick={signOut}
+              title='Log out'
+              icon={<AiOutlineLogout />}
+            />
+          </>
+        ) : (
+          <DropDownLink
+            handleClick={navigateToAuthPage}
+            title='Sign in'
+            icon={<AiOutlineLogin />}
+          />
+        )}
       </ul>
     </div>
   );

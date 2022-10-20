@@ -1,7 +1,19 @@
+import { useRouter } from 'next/router';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+
+import nhost from '@/lib/nhost';
+import useRedirectTo from '@/hooks/useRedirectTo';
 
 import Input from '@/components/forms/Elements/Input';
 import PasswordInput from '@/components/forms/Elements/PasswordInput';
+
+import {
+  loginFormLoading,
+  stopAuthFormLoading,
+} from '@/redux/authForms/authFormsSlice';
+import { RootState } from '@/redux/store';
 
 type FormValues = {
   email: string;
@@ -9,6 +21,14 @@ type FormValues = {
 };
 
 export default function LoginFormProvider() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const redirectTo = useRedirectTo();
+
+  const { isLoginFormLoading } = useSelector(
+    (state: RootState) => state.authForms
+  );
+
   const methods = useForm<FormValues>({
     mode: 'onTouched',
     reValidateMode: 'onChange',
@@ -16,17 +36,24 @@ export default function LoginFormProvider() {
 
   const { handleSubmit } = methods;
 
-  const onSubmit: SubmitHandler<FormValues> = async () => {
-    // try {
-    //   const { email, password } = data;
-    //   const { session, error } = await nhost.auth.signIn({
-    //     email,
-    //     password,
-    //   });
-    //   console.log('--------> res is: ', res);
-    // } catch (error) {
-    //   console.log('Erro is: ', error);
-    // }
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      dispatch(loginFormLoading());
+      const { email, password } = data;
+      const { error } = await nhost.auth.signIn({
+        email,
+        password,
+      });
+      if (error) {
+        dispatch(stopAuthFormLoading());
+        toast.error(error.message);
+      } else {
+        dispatch(stopAuthFormLoading());
+        router.push(redirectTo);
+      }
+    } catch (error) {
+      toast.error('Something went wrong, please try again');
+    }
   };
 
   return (
@@ -58,8 +85,14 @@ export default function LoginFormProvider() {
           }}
         />
 
-        <button className={`btn btn-primary btn-block my-6 `} type='submit'>
-          Log in
+        <button
+          disabled={isLoginFormLoading}
+          className={`btn btn-primary btn-block my-6 ${
+            isLoginFormLoading ? 'loading' : null
+          }`}
+          type='submit'
+        >
+          login
         </button>
       </form>
     </FormProvider>

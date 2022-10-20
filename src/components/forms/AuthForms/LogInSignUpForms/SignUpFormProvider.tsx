@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 
 import nhost from '@/lib/nhost';
+import useRedirectTo from '@/hooks/useRedirectTo';
 
 import Input from '@/components/forms/Elements/Input';
 import PasswordInput from '@/components/forms/Elements/PasswordInput';
@@ -13,7 +14,6 @@ import {
   stopAuthFormLoading,
 } from '@/redux/authForms/authFormsSlice';
 import { RootState } from '@/redux/store';
-import redirectTo from '@/utils/redirectTo';
 
 type FormValues = {
   name: string;
@@ -24,6 +24,7 @@ type FormValues = {
 export default function SignUpFormProvider() {
   const dispatch = useDispatch();
   const router = useRouter();
+  const redirectTo = useRedirectTo();
 
   const { isSignUpFormLoading } = useSelector(
     (state: RootState) => state.authForms
@@ -53,12 +54,12 @@ export default function SignUpFormProvider() {
         dispatch(stopAuthFormLoading());
         toast.error(error.message);
       } else {
-        // TODO: Redirect to home page or back
         dispatch(stopAuthFormLoading());
         router.push(redirectTo);
       }
     } catch (error) {
       dispatch(stopAuthFormLoading());
+      toast.error('Something went wrong, please try again');
     }
   };
 

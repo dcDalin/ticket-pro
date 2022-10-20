@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import { MdArrowBack } from 'react-icons/md';
 
-import AppTitle from '@/components/navigation/AppTitle';
+import useRedirectTo from '@/hooks/useRedirectTo';
 
-import redirectTo from '@/utils/redirectTo';
+import AppTitle from '@/components/navigation/AppTitle';
 
 interface IAuthFormLayoutProps {
   children: ReactNode;
@@ -16,6 +16,7 @@ export default function AuthFormLayout({
   title,
 }: IAuthFormLayoutProps) {
   const router = useRouter();
+  const redirectTo = useRedirectTo();
 
   return (
     <div className='mx-auto my-0 w-full max-w-4xl border-0 bg-base-100 pb-10 shadow-none md:my-5 md:border md:shadow-xl'>
