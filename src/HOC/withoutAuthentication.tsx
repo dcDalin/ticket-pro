@@ -13,7 +13,7 @@ const withoutAuthentication: withoutAuthenticationFn = (Component) => {
     const router = useRouter();
 
     if (isLoading) {
-      return <h1>Without loading...</h1>;
+      return <></>;
     }
 
     if (isAuthenticated) {

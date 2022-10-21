@@ -16,7 +16,7 @@ const withAuthentication: withAuthenticationFn = (Component) => {
     const router = useRouter();
 
     if (isLoading || loading) {
-      return <h1>Loading...</h1>;
+      return <></>;
     }
 
     if (!isAuthenticated) {

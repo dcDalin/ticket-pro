@@ -10,14 +10,10 @@ type withPageFn = (Component: FC) => FC;
 
 const withPage: withPageFn = (Component) => {
   const Authenticated: FC = (props): JSX.Element | null => {
-    const { isLoading, isAuthenticated } = useAuthenticationStatus();
+    const { isAuthenticated } = useAuthenticationStatus();
     const router = useRouter();
 
-    const { data, loading } = useCheckUserProfileExists();
-
-    if (isLoading || loading) {
-      return <h1>Loading...</h1>;
-    }
+    const { data } = useCheckUserProfileExists();
 
     if (isAuthenticated) {
       if (data && data.profile_by_pk) {
