@@ -8,12 +8,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { BiMenuAltRight } from 'react-icons/bi';
+import { CgProfile } from 'react-icons/cg';
 import { MdManageAccounts } from 'react-icons/md';
 
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
 
 import { REDIRECT_TO } from '@/constants/localStorage';
-import { ACCOUNT, LOG_IN } from '@/constants/routes';
+import { ACCOUNT, LOG_IN, SETTINGS } from '@/constants/routes';
 
 export default function UserDropdown() {
   const router = useRouter();
@@ -27,6 +28,13 @@ export default function UserDropdown() {
     // update local storage
     localStorage.setItem(REDIRECT_TO, router.pathname);
     router.push(LOG_IN);
+  };
+
+  const navigateToSettingsPage = () => {
+    // set path user was on before navigating to auth pages
+    // update local storage
+    localStorage.setItem(REDIRECT_TO, router.pathname);
+    router.push(SETTINGS);
   };
 
   return (
@@ -66,7 +74,12 @@ export default function UserDropdown() {
           <>
             <DropDownLink
               handleClick={() => router.push(ACCOUNT)}
-              title='My Account'
+              title='My Profile'
+              icon={<CgProfile />}
+            />
+            <DropDownLink
+              handleClick={navigateToSettingsPage}
+              title='Settings'
               icon={<MdManageAccounts />}
             />
             <div className='divider m-0'></div>

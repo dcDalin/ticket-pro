@@ -5,3 +5,6 @@ export const SIGN_UP = '/auth/signup';
 export const LOG_IN = '/auth/login';
 export const ACCOUNT = '/account';
 export const COMPLETE_PROFILE = '/account/complete-profile';
+export const SETTINGS = '/account/settings';
+export const SETTINGS_CHANGE_PASSWORD = '/account/settings/change-password';
+export const SETTINGS_NOTIFICATIONS = '/account/settings/notifications';
