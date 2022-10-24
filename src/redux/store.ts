@@ -3,13 +3,13 @@ import { createWrapper } from 'next-redux-wrapper';
 import { Action } from 'redux';
 
 import authForms from '@/redux/authForms/authFormsSlice';
-import modals from '@/redux/modals/modalSlice';
+import updateSettingsModal from '@/redux/modals/updateSettingsmodalSlice';
 
 const makeStore = () =>
   configureStore({
     reducer: {
       authForms,
-      modals,
+      updateSettingsModal,
     },
     devTools: true,
   });

@@ -21,15 +21,17 @@ export default function UserSettingsAvatar() {
   });
 
   return (
-    <div className='flex items-center space-x-4'>
-      <div className='avatar'>
-        <div className='w-14 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-16'>
-          {avatar ? (
-            <Image src={avatar} alt='Avatar' width={100} height={100} />
-          ) : null}
+    <div className='grid grid-cols-6 gap-x-4'>
+      <div className='col-span-2 text-right'>
+        <div className='avatar'>
+          <div className='w-14 rounded-full ring ring-primary ring-offset-2 ring-offset-base-100 md:w-16'>
+            {avatar ? (
+              <Image src={avatar} alt='Avatar' width={100} height={100} />
+            ) : null}
+          </div>
         </div>
       </div>
-      <div>
+      <div className='col-span-4'>
         {loading ? (
           <UserNameLoading />
         ) : data ? (

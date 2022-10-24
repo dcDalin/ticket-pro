@@ -11,8 +11,6 @@ import '@/styles/globals.css';
 
 import nhost from '@/lib/nhost';
 
-import ModalWrapper from '@/components/modals/ModalWrapper';
-
 import { wrapper } from '@/redux/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -27,7 +25,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <NhostApolloProvider nhost={nhost}>
         <Component {...pageProps} />
         <Toaster />
-        <ModalWrapper />
       </NhostApolloProvider>
     </NhostNextProvider>
   );

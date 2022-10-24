@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import NoHeaderLayout from '@/components/layouts/NoHeaderLayout';
 import NoNavLayout from '@/components/layouts/NoNavLayout';
+import UpdateSettingsModalWrapper from '@/components/modals/UpdateSettingsModalWrapper';
 import SettingsNav from '@/components/navigation/SettingsNav';
 
 interface ISettingsLayoutProps {
@@ -40,6 +41,7 @@ export default function SettingsLayout({
             <div className='pr-4 md:pr-8'>{children}</div>
           </div>
         </div>
+        <UpdateSettingsModalWrapper />
       </NoNavLayout>
     </NoHeaderLayout>
   );
