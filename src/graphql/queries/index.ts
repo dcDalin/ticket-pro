@@ -8,7 +8,7 @@ export const CHECK_USER_PROFILE_EXISTS = gql`
   }
 `;
 
-export const FETCH_USER_NAME_BY_PK = gql`
+export const FETCH_USER_PROFILE_BY_PK = gql`
   query FetchUserNameByPk($id: uuid = "") {
     profile_by_pk(id: $id) {
       userName

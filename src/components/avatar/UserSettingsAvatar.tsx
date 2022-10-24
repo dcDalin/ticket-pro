@@ -1,24 +1,19 @@
-import { useUserAvatarUrl, useUserId } from '@nhost/nextjs';
-import { useAuthQuery } from '@nhost/react-apollo';
+import { useUserAvatarUrl } from '@nhost/nextjs';
 import Image from 'next/image';
 
-import { FETCH_USER_NAME_BY_PK } from '@/graphql/queries';
+import userProfile from '@/hooks/useFetchUserProfileByPk';
 
 function UserNameLoading() {
   return (
     <div className='flex flex-col space-y-2'>
       <div className='h-4 w-20 animate-pulse rounded-sm bg-gray-100'></div>
-      <div className='h-8 w-20 animate-pulse rounded-sm bg-gray-100'></div>
+      <div className='h-6 w-full animate-pulse rounded-md bg-gray-100'></div>
     </div>
   );
 }
 export default function UserSettingsAvatar() {
   const avatar = useUserAvatarUrl();
-  const userId = useUserId();
-
-  const { loading, data } = useAuthQuery(FETCH_USER_NAME_BY_PK, {
-    variables: { id: userId },
-  });
+  const { loading, data } = userProfile();
 
   return (
     <div className='grid grid-cols-6 gap-x-4'>
@@ -36,7 +31,7 @@ export default function UserSettingsAvatar() {
           <UserNameLoading />
         ) : data ? (
           <div className='flex flex-col space-y-2'>
-            <h2 className='font-bold'>{data.profile_by_pk.userName}</h2>
+            <h2 className='font-bold'>{data.userName}</h2>
             <button className='btn btn-outline btn-xs overflow-auto'>
               Change profile photo
             </button>

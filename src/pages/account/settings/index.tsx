@@ -1,4 +1,7 @@
+import { useUserDisplayName } from '@nhost/nextjs';
 import { useDispatch } from 'react-redux';
+
+import userProfile from '@/hooks/useFetchUserProfileByPk';
 
 import UserSettingsAvatar from '@/components/avatar/UserSettingsAvatar';
 import ValueInput from '@/components/forms/Elements/ValueInput';
@@ -10,19 +13,22 @@ import { openSettingsModal } from '@/redux/modals/updateSettingsmodalSlice';
 
 function SettingsPage() {
   const dispatch = useDispatch();
+  const { loading: userProfileLoading, data } = userProfile();
+  const displayName = useUserDisplayName();
 
   const settingsInputs = [
     {
       label: 'Name',
-      value: 'dc_dalin',
+      value: data.userName,
       handleClick: () => dispatch(openSettingsModal(DISPLAY_NAME)),
-      info: '',
+      info: 'Could be your business name',
+      loading: userProfileLoading,
     },
     {
       label: 'Username',
-      value: 'dc_dalin',
+      value: displayName,
       handleClick: () => dispatch(openSettingsModal(USER_NAME)),
-      info: 'Some info about this here',
+      info: 'Unique name associated with your profile URL',
     },
   ];
   return (
@@ -34,17 +40,20 @@ function SettingsPage() {
       <UserSettingsAvatar />
       <div className='pt-4'>
         {settingsInputs && settingsInputs.length
-          ? settingsInputs.map(({ label, value, handleClick, info }, index) => {
-              return (
-                <ValueInput
-                  key={index}
-                  label={label}
-                  value={value}
-                  handleClick={handleClick}
-                  info={info}
-                />
-              );
-            })
+          ? settingsInputs.map(
+              ({ label, value, handleClick, info, loading }, index) => {
+                return (
+                  <ValueInput
+                    key={index}
+                    label={label}
+                    value={value}
+                    handleClick={handleClick}
+                    info={info}
+                    loading={loading}
+                  />
+                );
+              }
+            )
           : null}
       </div>
 
