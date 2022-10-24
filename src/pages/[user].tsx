@@ -1,17 +1,24 @@
+import { useRouter } from 'next/router';
+
+import useUserProfile from '@/hooks/useFetchUserProfileByUsername';
+
 import AppLayout from '@/components/layouts/AppLayout';
 
 import withPage from '@/HOC/withPage';
 
 function UserProfilePage() {
-  // const router = useRouter();
-  // const userId = useUserId();
-  // const accessToken = useAccessToken();
+  const router = useRouter();
 
-  // const path = router.query.user as string;
+  const userName = router.query.user as string;
+
+  const { loading, data, error } = useUserProfile(userName);
+
+  if (loading) return <p>loading</p>;
+  if (error) return <p>{JSON.stringify(error)}</p>;
 
   return (
     <AppLayout templateTitle='Tours' templateDescription='Home page'>
-      <h1>home page</h1>
+      {JSON.stringify(data)}
     </AppLayout>
   );
 }

@@ -15,3 +15,18 @@ export const FETCH_USER_PROFILE_BY_PK = gql`
     }
   }
 `;
+
+export const FETCH_USER_PROFILE_BY_USER_NAME = gql`
+  query FetchUserProfileByUserName($_eq: String = "reload") {
+    profile(where: { userName: { _eq: $_eq } }) {
+      id
+      userName
+      user {
+        avatarUrl
+        createdAt
+        displayName
+        lastSeen
+      }
+    }
+  }
+`;
