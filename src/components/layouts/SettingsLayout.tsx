@@ -32,7 +32,7 @@ export default function SettingsLayout({
           <div className='px-4 md:px-8'>
             {title || subTitle ? (
               <div className='flex items-center space-x-1 pb-4 md:hidden md:pb-8'>
-                {title ? <h2 className='font-bold'>{title}</h2> : null}
+                {title ? <h2 className='text-xl font-bold'>{title}</h2> : null}
                 {subTitle ? <h4>{subTitle}</h4> : null}
               </div>
             ) : null}
