@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
-import { MdManageAccounts } from 'react-icons/md';
+import { FiSettings } from 'react-icons/fi';
 
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
 
@@ -74,13 +74,13 @@ export default function UserDropdown() {
           <>
             <DropDownLink
               handleClick={() => router.push(ACCOUNT)}
-              title='My Profile'
+              title='My profile'
               icon={<CgProfile />}
             />
             <DropDownLink
               handleClick={navigateToSettingsPage}
               title='Settings'
-              icon={<MdManageAccounts />}
+              icon={<FiSettings />}
             />
             <div className='divider m-0'></div>
             <DropDownLink

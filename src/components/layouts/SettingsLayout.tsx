@@ -25,13 +25,13 @@ export default function SettingsLayout({
       templateDescription={templateDescription}
     >
       <NoNavLayout>
-        <div className='mr-4 flex divide-x'>
+        <div className='mr-4 flex min-h-screen divide-x md:min-h-fit'>
           <div className='w-20 md:w-1/4'>
             <SettingsNav />
           </div>
-          <div className='px-4'>
+          <div className='px-4 md:px-8'>
             {title || subTitle ? (
-              <div className='flex items-center space-x-1 pb-2 md:hidden'>
+              <div className='flex items-center space-x-1 pb-4 md:hidden md:pb-8'>
                 {title ? <h2 className='font-bold'>{title}</h2> : null}
                 {subTitle ? <h4>{subTitle}</h4> : null}
               </div>

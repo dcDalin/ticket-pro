@@ -4,7 +4,11 @@ import withAuthentication from '@/HOC/withAuthentication';
 
 function NotificationsPage() {
   return (
-    <SettingsLayout templateTitle='' templateDescription=''>
+    <SettingsLayout
+      templateTitle=''
+      templateDescription=''
+      title='Notifications'
+    >
       notifications
     </SettingsLayout>
   );

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
-import { AiOutlineSetting } from 'react-icons/ai';
 import { MdOutlineNotificationsActive, MdPassword } from 'react-icons/md';
+import { RiUserSettingsLine } from 'react-icons/ri';
 
 import {
   SETTINGS,
@@ -24,7 +24,7 @@ function SettingsNavItem({ path, title, icon }: ISettingsNavItemProps) {
           router.pathname === path && 'active'
         }`}
       >
-        <div className='flex items-center text-center'>{icon}</div>
+        <span className='flex items-center text-center'>{icon}</span>
         <span className='hidden md:block'>{title}</span>
       </a>
     </li>
@@ -36,7 +36,7 @@ export default function SettingsNav() {
     {
       title: 'Edit profile',
       path: SETTINGS,
-      icon: <AiOutlineSetting />,
+      icon: <RiUserSettingsLine />,
     },
     {
       title: 'Change password',
