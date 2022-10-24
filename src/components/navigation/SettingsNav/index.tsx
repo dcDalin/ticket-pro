@@ -20,7 +20,7 @@ function SettingsNavItem({ path, title, icon }: ISettingsNavItemProps) {
   return (
     <li onClick={() => router.push(path)} className='w-full'>
       <a
-        className={`flex items-center justify-center md:justify-start ${
+        className={`flex h-16 items-center justify-center md:h-12 md:justify-start ${
           router.pathname === path && 'active'
         }`}
       >

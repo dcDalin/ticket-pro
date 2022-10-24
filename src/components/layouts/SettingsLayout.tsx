@@ -25,8 +25,8 @@ export default function SettingsLayout({
       templateDescription={templateDescription}
     >
       <NoNavLayout>
-        <div className='mx-4 flex divide-x'>
-          <div className='w-18 md:w-1/4'>
+        <div className='mr-4 flex divide-x'>
+          <div className='w-20 md:w-1/4'>
             <SettingsNav />
           </div>
           <div className='px-4'>
