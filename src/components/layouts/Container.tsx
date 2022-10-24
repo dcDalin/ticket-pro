@@ -6,6 +6,8 @@ interface IContainerProps {
 
 export default function Container({ children }: IContainerProps) {
   return (
-    <section className='container mx-auto px-4 md:px-0'>{children}</section>
+    <section className='container mx-auto flex flex-col space-y-4 px-2 md:space-y-8 md:px-0'>
+      {children}
+    </section>
   );
 }
