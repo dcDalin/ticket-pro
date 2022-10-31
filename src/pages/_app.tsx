@@ -1,5 +1,3 @@
-import { NhostNextProvider } from '@nhost/nextjs';
-import { NhostApolloProvider } from '@nhost/react-apollo';
 import type { AppProps } from 'next/app';
 import Router from 'next/router';
 import NProgress from 'nprogress';
@@ -8,8 +6,6 @@ import { Toaster } from 'react-hot-toast';
 
 import 'nprogress/nprogress.css';
 import '@/styles/globals.css';
-
-import nhost from '@/lib/nhost';
 
 import { wrapper } from '@/redux/store';
 
@@ -21,12 +17,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <NhostNextProvider nhost={nhost}>
-      <NhostApolloProvider nhost={nhost}>
-        <Component {...pageProps} />
-        <Toaster />
-      </NhostApolloProvider>
-    </NhostNextProvider>
+    <>
+      <Component {...pageProps} />
+      <Toaster />
+    </>
   );
 }
 

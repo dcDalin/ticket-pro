@@ -1,4 +1,3 @@
-import { useUserDisplayName } from '@nhost/nextjs';
 import { useDispatch } from 'react-redux';
 
 import userProfile from '@/hooks/useFetchUserProfileByPk';
@@ -8,13 +7,12 @@ import ValueInput from '@/components/forms/Elements/ValueInput';
 import SettingsLayout from '@/components/layouts/SettingsLayout';
 
 import { DISPLAY_NAME, USER_NAME } from '@/constants/modalNames';
-import withAuthentication from '@/HOC/withAuthentication';
 import { openSettingsModal } from '@/redux/modals/updateSettingsmodalSlice';
 
 function SettingsPage() {
   const dispatch = useDispatch();
   const { loading: userProfileLoading, data } = userProfile();
-  const displayName = useUserDisplayName();
+  const displayName = 'dalin';
 
   const settingsInputs = [
     {
@@ -66,4 +64,4 @@ function SettingsPage() {
   );
 }
 
-export default withAuthentication(SettingsPage);
+export default SettingsPage;

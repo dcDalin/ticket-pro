@@ -1,7 +1,5 @@
 import AppLayout from '@/components/layouts/AppLayout';
 
-import withAuthentication from '@/HOC/withAuthentication';
-
 function AccountPage() {
   return (
     <AppLayout templateTitle='Account' templateDescription='Account page'>
@@ -10,4 +8,4 @@ function AccountPage() {
   );
 }
 
-export default withAuthentication(AccountPage);
+export default AccountPage;

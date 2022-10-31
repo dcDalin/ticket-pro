@@ -7,8 +7,6 @@ import Avatar from '@/components/avatar';
 import AppLayout from '@/components/layouts/AppLayout';
 import Container from '@/components/layouts/Container';
 
-import withPage from '@/HOC/withPage';
-
 function UserProfilePage() {
   const router = useRouter();
 
@@ -36,7 +34,7 @@ function UserProfilePage() {
         </div>
 
         <div className='py-4 md:py-8'>
-          <button className='btn btn-primary btn-square'>
+          <button className='btn-primary btn-square btn'>
             <AiOutlinePlus />
           </button>
         </div>
@@ -45,4 +43,4 @@ function UserProfilePage() {
   );
 }
 
-export default withPage(UserProfilePage);
+export default UserProfilePage;

@@ -1,10 +1,6 @@
-import { useRouter } from 'next/router';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-
-import nhost from '@/lib/nhost';
-import useRedirectTo from '@/hooks/useRedirectTo';
 
 import Input from '@/components/forms/Elements/Input';
 import PasswordInput from '@/components/forms/Elements/PasswordInput';
@@ -23,8 +19,6 @@ type FormValues = {
 
 export default function SignUpFormProvider() {
   const dispatch = useDispatch();
-  const router = useRouter();
-  const redirectTo = useRedirectTo();
 
   const { isSignUpFormLoading } = useSelector(
     (state: RootState) => state.authForms
@@ -42,21 +36,7 @@ export default function SignUpFormProvider() {
       dispatch(signUpFormLoading());
       const { name, email, password } = data;
 
-      const { error } = await nhost.auth.signUp({
-        email,
-        password,
-        options: {
-          displayName: name,
-        },
-      });
-
-      if (error) {
-        dispatch(stopAuthFormLoading());
-        toast.error(error.message);
-      } else {
-        dispatch(stopAuthFormLoading());
-        router.push(redirectTo);
-      }
+      return { name, email, password };
     } catch (error) {
       dispatch(stopAuthFormLoading());
       toast.error('Something went wrong, please try again');
@@ -116,7 +96,7 @@ export default function SignUpFormProvider() {
 
         <button
           disabled={isSignUpFormLoading}
-          className={`btn btn-primary btn-block my-6 ${
+          className={`btn-primary btn-block btn my-6 ${
             isSignUpFormLoading ? 'loading' : null
           }`}
           type='submit'

@@ -1,9 +1,7 @@
-import { useUserDisplayName } from '@nhost/nextjs';
-
 import ClaimUserNameProvider from '@/components/forms/AuthForms/ClaimUserNameProvider';
 import CompleteProfileFormLayout from '@/components/forms/FormLayouts/CompleteProfileFormLayout';
 export default function CompleteProfileForm() {
-  const displayName = useUserDisplayName() || '';
+  const displayName = '';
 
   return (
     <CompleteProfileFormLayout

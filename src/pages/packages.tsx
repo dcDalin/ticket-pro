@@ -1,7 +1,5 @@
 import AppLayout from '@/components/layouts/AppLayout';
 
-import withPage from '@/HOC/withPage';
-
 function PackagesPage() {
   return (
     <AppLayout templateTitle='Packages' templateDescription='Home page'>
@@ -10,4 +8,4 @@ function PackagesPage() {
   );
 }
 
-export default withPage(PackagesPage);
+export default PackagesPage;

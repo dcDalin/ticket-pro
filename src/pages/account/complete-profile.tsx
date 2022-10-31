@@ -1,8 +1,6 @@
 import CompleteProfileForm from '@/components/forms/CompleteProfileForm';
 import NoHeaderLayout from '@/components/layouts/NoHeaderLayout';
 
-import withCompleteProfile from '@/HOC/withCompleteProfile';
-
 const CompleteProfilePage = () => {
   return (
     <NoHeaderLayout
@@ -14,4 +12,4 @@ const CompleteProfilePage = () => {
   );
 };
 
-export default withCompleteProfile(CompleteProfilePage);
+export default CompleteProfilePage;

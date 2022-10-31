@@ -1,16 +1,11 @@
-import { useMutation } from '@apollo/client';
-import { useAccessToken, useUserId } from '@nhost/react';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import Router from 'next/router';
 import { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import { useSelector } from 'react-redux';
 
 import Input from '@/components/forms/Elements/Input';
 
-import { ADD_USERNAME_TO_PROFILE } from '@/graphql/mutations';
 import { RootState } from '@/redux/store';
 
 type FormValues = {
@@ -18,9 +13,6 @@ type FormValues = {
 };
 
 export default function UpdateUserNameProvider() {
-  const userId = useUserId();
-  const accessToken = useAccessToken();
-
   const [userNameSearchLoading, setUserNameSearchLoading] = useState(false);
 
   const { isLoginFormLoading } = useSelector(
@@ -34,29 +26,9 @@ export default function UpdateUserNameProvider() {
 
   const { handleSubmit } = methods;
 
-  const [addUserNameToProfile, { loading, data, error }] = useMutation(
-    ADD_USERNAME_TO_PROFILE
-  );
-
-  if (error) {
-    toast.error('Something went wrong. Plese try again');
-  }
-
-  if (data) {
-    Router.reload();
-  }
-
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const { userName } = data;
-
-    addUserNameToProfile({
-      context: {
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-        },
-      },
-      variables: { id: userId, userName },
-    });
+    return userName;
   };
 
   return (
@@ -109,9 +81,9 @@ export default function UpdateUserNameProvider() {
         />
 
         <button
-          disabled={isLoginFormLoading || loading}
-          className={`btn btn-primary gap-2 ${
-            isLoginFormLoading || loading ? 'loading' : null
+          disabled={isLoginFormLoading}
+          className={`btn-primary btn gap-2 ${
+            isLoginFormLoading ? 'loading' : null
           }`}
           type='submit'
         >

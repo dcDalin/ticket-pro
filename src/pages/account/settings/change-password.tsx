@@ -1,7 +1,5 @@
 import SettingsLayout from '@/components/layouts/SettingsLayout';
 
-import withAuthentication from '@/HOC/withAuthentication';
-
 function ChangePasswordPage() {
   return (
     <SettingsLayout
@@ -14,4 +12,4 @@ function ChangePasswordPage() {
   );
 }
 
-export default withAuthentication(ChangePasswordPage);
+export default ChangePasswordPage;
