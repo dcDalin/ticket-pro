@@ -1,7 +1,11 @@
 import { useUserAvatarUrl } from '@nhost/nextjs';
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
 
 import userProfile from '@/hooks/useFetchUserProfileByPk';
+
+import { CHANGE_PROFILE_PHOTO } from '@/constants/modalNames';
+import { openSettingsModal } from '@/redux/modals/updateSettingsmodalSlice';
 
 function UserNameLoading() {
   return (
@@ -12,6 +16,7 @@ function UserNameLoading() {
   );
 }
 export default function UserSettingsAvatar() {
+  const dispatch = useDispatch();
   const avatar = useUserAvatarUrl();
   const { loading, data } = userProfile();
 
@@ -32,7 +37,10 @@ export default function UserSettingsAvatar() {
         ) : data ? (
           <div className='flex flex-col space-y-2'>
             <h2 className='font-bold'>{data.userName}</h2>
-            <button className='btn btn-outline btn-xs overflow-auto'>
+            <button
+              className='btn btn-outline btn-xs overflow-auto'
+              onClick={() => dispatch(openSettingsModal(CHANGE_PROFILE_PHOTO))}
+            >
               Change profile photo
             </button>
           </div>

@@ -1,2 +1,3 @@
 export const DISPLAY_NAME = 'DISPLAY_NAME';
 export const USER_NAME = 'USER_NAME';
+export const CHANGE_PROFILE_PHOTO = 'CHANGE_PROFILE_PHOTO';

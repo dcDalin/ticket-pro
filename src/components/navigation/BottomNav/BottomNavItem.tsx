@@ -17,7 +17,7 @@ export default function BottomNavItem({
   return (
     <button
       className={`cursor-pointer border-t-2 focus:ring ${
-        router.pathname === path ? 'border-primary' : 'border-transparent'
+        router.asPath === path ? 'border-primary' : 'border-transparent'
       }`}
       onClick={() => router.push(path)}
     >

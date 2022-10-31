@@ -2,7 +2,11 @@ import { useSelector } from 'react-redux';
 
 import UpdateUserNameProvider from '@/components/forms/Settings/UpdateUserNameProvider';
 
-import { DISPLAY_NAME, USER_NAME } from '@/constants/modalNames';
+import {
+  CHANGE_PROFILE_PHOTO,
+  DISPLAY_NAME,
+  USER_NAME,
+} from '@/constants/modalNames';
 import { RootState } from '@/redux/store';
 
 interface ISettingsWrapperProps {
@@ -34,6 +38,12 @@ export default function SettingsModalSwitch() {
     case USER_NAME:
       return (
         <SettingsWrapper title='Update username'>
+          <UpdateUserNameProvider />
+        </SettingsWrapper>
+      );
+    case CHANGE_PROFILE_PHOTO:
+      return (
+        <SettingsWrapper title='Upload new profile photo'>
           <UpdateUserNameProvider />
         </SettingsWrapper>
       );

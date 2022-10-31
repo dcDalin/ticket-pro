@@ -12,7 +12,7 @@ export default function TopNavItem({ title, icon, path }: ITopNavItemProps) {
   return (
     <div
       className={`btn btn-ghost flex  h-full cursor-pointer items-center space-x-1 rounded-none border-b-2 px-4 ${
-        router.pathname === path &&
+        router.asPath === path &&
         'cursor-default border-0 border-b-2 border-primary hover:border-b-2 hover:border-b-primary hover:bg-transparent'
       }`}
       onClick={() => router.push(path)}

@@ -6,15 +6,18 @@ import {
 } from '@nhost/nextjs';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai';
 import { BiMenuAltRight } from 'react-icons/bi';
 import { CgProfile } from 'react-icons/cg';
 import { FiSettings } from 'react-icons/fi';
 
+import useFetchUserProfileByPk from '@/hooks/useFetchUserProfileByPk';
+
 import DropDownLink from '@/components/navigation/TopNav/DropDownLink';
 
 import { REDIRECT_TO } from '@/constants/localStorage';
-import { ACCOUNT, LOG_IN, SETTINGS } from '@/constants/routes';
+import { LOG_IN, SETTINGS } from '@/constants/routes';
 
 export default function UserDropdown() {
   const router = useRouter();
@@ -23,17 +26,23 @@ export default function UserDropdown() {
   const displayName = useUserDisplayName();
   const { signOut } = useSignOut();
 
+  const { data, loading, error } = useFetchUserProfileByPk();
+
   const navigateToAuthPage = () => {
     // set path user was on before navigating to auth pages
     // update local storage
-    localStorage.setItem(REDIRECT_TO, router.pathname);
+    localStorage.setItem(REDIRECT_TO, router.asPath);
     router.push(LOG_IN);
   };
+
+  if (error) {
+    toast.error('Error fetching profile');
+  }
 
   const navigateToSettingsPage = () => {
     // set path user was on before navigating to auth pages
     // update local storage
-    localStorage.setItem(REDIRECT_TO, router.pathname);
+    localStorage.setItem(REDIRECT_TO, router.asPath);
     router.push(SETTINGS);
   };
 
@@ -73,7 +82,8 @@ export default function UserDropdown() {
         {isAuthenticated ? (
           <>
             <DropDownLink
-              handleClick={() => router.push(ACCOUNT)}
+              loading={loading}
+              handleClick={() => router.push(`/${data.userName}`)}
               title='My profile'
               icon={<CgProfile />}
             />
